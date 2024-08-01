@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22.3.0'  # Specify your Node.js version here
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Next.js project
+        run: npm run build
+
+      - name: Run Cypress tests
+        run: npm run test:cypress
+        env:
+          CYPRESS_baseUrl: 'http://localhost:3000'  # Adjust if needed
+          # Add other environment variables if necessary
+
+      - name: Upload Cypress results
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-results
+          path: cypress/results  # Adjust the path to your Cypress results folder
