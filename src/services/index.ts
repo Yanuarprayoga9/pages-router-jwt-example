@@ -22,7 +22,7 @@ export const getPosts = async () => {
         console.log(res)
         return res.data
     } catch (error) {
-        
+        return []
     }
 }
 export default api;
