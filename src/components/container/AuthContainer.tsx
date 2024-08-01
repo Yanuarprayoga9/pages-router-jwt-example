@@ -1,4 +1,3 @@
-import { useAuth } from "@/context/AuthContext";
 import { getAccessToken } from "@/lib/utils";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";

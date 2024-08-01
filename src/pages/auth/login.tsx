@@ -42,7 +42,6 @@ const Login = () => {
     const log = await login(values.email, values.password);
     if (log) {
         const redirectUrl = sessionStorage.getItem("redirectUrl") || "/blogs";
-        // Arahkan ke URL asal atau default ke halaman utama
         router.push(redirectUrl);
     }
     console.log(values);
